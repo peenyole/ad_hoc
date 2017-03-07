@@ -61,7 +61,7 @@ def get_latest_released(series_title, url):
 
 #Download a single image form eatmanga
 def download_image(url, img_name):
-  time.sleep(5)
+  time.sleep(2)
 
   response = urllib2.urlopen(url)
 
@@ -87,7 +87,7 @@ def download_image(url, img_name):
 #Find all of the image pages for a single chapter on eatmanga
 def single_chap_walkthrough(chap_url, chap_title, series_local_path):
   print "Downloading " + chap_title
-  time.sleep(5)
+  time.sleep(2)
   temp = urllib2.urlopen(chap_url)
   soup = BeautifulSoup(temp.read(), 'html.parser')
   #Get all chapters from the select drop-down
@@ -115,8 +115,8 @@ def single_chap_walkthrough(chap_url, chap_title, series_local_path):
 
 #Downloads all chapters for series
 def download_chap(series_title, url, chap_num, series_local_path):
-  print 'MangaReader: Downloading ' + series_title
-  time.sleep(5)
+  print 'MangaHere: Downloading ' + series_title
+  time.sleep(2)
   temp     = urllib2.urlopen(url)
   soup     = BeautifulSoup(temp.read(), 'html.parser')
 
@@ -125,15 +125,18 @@ def download_chap(series_title, url, chap_num, series_local_path):
   success = False
 
   for link in links:
-    if series_title in link.text:
-    
-      chap_title = link.text
-      chap_url   = link['href']
-      #Proect against titles with numerics
-      link_chap_num   = re.sub(series_title, "", link.text)
+    try:
+      if series_title in link.text:
+      
+        chap_title = link.text
+        chap_url   = link['href']
+        #Proect against titles with numerics
+        link_chap_num   = re.sub(series_title, "", link.text)
 
-      if int(re.sub("[^0-9]", "", link_chap_num)) == int(chap_num):
-        success = single_chap_walkthrough(chap_url, chap_title.lstrip(), series_local_path)
+        if int(re.sub("[^0-9]", "", link_chap_num)) == int(chap_num):
+          success = single_chap_walkthrough(chap_url, chap_title.lstrip(), series_local_path)
+    except:
+      pass
   return success
 
 

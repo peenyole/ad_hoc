@@ -44,7 +44,7 @@ def get_latest_released(series_title, url):
 
 #Download a single image form eatmanga
 def download_image(url, img_name):
-  time.sleep(5)
+  time.sleep(2)
   base_url = "http://www.mangareader.net"
   temp = urllib2.urlopen(base_url + url)
   soup = BeautifulSoup(temp.read(), 'html.parser')
@@ -64,37 +64,42 @@ def download_image(url, img_name):
 #Find all of the image pages for a single chapter on eatmanga
 def single_chap_walkthrough(chap_url, chap_title, series_local_path):
   print "Downloading " + chap_title
-  time.sleep(5)
-  temp = urllib2.urlopen(chap_url)
-  soup = BeautifulSoup(temp.read(), 'html.parser')
-  #Get all chapters from the select drop-down
-  selects = soup.find_all('select')
+  time.sleep(2)
 
   released = False
 
-  select = soup.find("select", { "id" : "pageMenu" })
+  try:
+    temp = urllib2.urlopen(chap_url)
+    soup = BeautifulSoup(temp.read(), 'html.parser')
+    #Get all chapters from the select drop-down
+    selects = soup.find_all('select')
+
+    select = soup.find("select", { "id" : "pageMenu" })
 
 
-  if select is not None:
-    try:
-      #Only make the chapter directory if it has been released.
-      os.chdir(series_local_path)
-      os.mkdir(chap_title)
-      os.chdir(series_local_path+"/"+chap_title)
+    if select is not None:
+      try:
+        #Only make the chapter directory if it has been released.
+        os.chdir(series_local_path)
+        os.mkdir(chap_title)
+        os.chdir(series_local_path+"/"+chap_title)
 
-      pages = select.find_all('option')
-      for page_urls in pages:
-        download_image(page_urls['value'], chap_title + "_" + page_urls.text)
-      released = True
-    except OSError:
-      print 'Already downloaded. skippping...'
-      pass
+        pages = select.find_all('option')
+        for page_urls in pages:
+          download_image(page_urls['value'], chap_title + "_" + page_urls.text)
+        released = True
+      except OSError:
+        print 'Already downloaded. skippping...'
+        pass
+  except urllib2.HTTPError, e:
+    print "ERROR: " + str(e.code)
+    pass
   return released
 
 #Downloads all chapters for series
 def download_chap(series_title, url, chap_num, series_local_path):
   print 'MangaReader: Downloading ' + series_title
-  time.sleep(5)
+  time.sleep(2)
   base_url = "http://www.mangareader.net"
   temp     = urllib2.urlopen(url)
   soup     = BeautifulSoup(temp.read(), 'html.parser')

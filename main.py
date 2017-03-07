@@ -10,7 +10,7 @@ import time
 base_dir = os.getcwd()
 to_download = bakaupdate.login(base_dir)
 
-blacklist = ['Kyochuu Rettou ', 'T REX Na Kanojo', 'Suicide Island', 'Gakkou Gurashi!']
+blacklist = ['Kyochuu Rettou', 'T REX Na Kanojo', 'Suicide Island', 'Gakkou Gurashi!', 'Monster Musume no Iru Nichijou']
 
 for title in to_download.keys():
   if title in blacklist:
@@ -50,11 +50,11 @@ if len(sys.argv) > 1 and sys.argv[1] == "-single":
 
   which = -1
 
-  if eatmanga_chap_num > mangareader_chap_num and eatmanga_chap_num > mangareader_chap_num:
+  if eatmanga_chap_num > mangareader_chap_num and eatmanga_chap_num > mangahere_chap_num:
     which = 0
-  elif mangareader_chap_num > eatmanga_chap_num and mangareader_chap_num > mangareader_chap_num:
+  elif mangareader_chap_num > eatmanga_chap_num and mangareader_chap_num > mangahere_chap_num:
     which = 1
-  elif mangahere_chap_num > mangareader_chap_num and mangahere_chap_num > mangareader_chap_num:
+  elif mangahere_chap_num >= mangareader_chap_num and mangahere_chap_num >= eatmanga_chap_num:
     which = 2
 
   local_path = base_dir + '/' + title

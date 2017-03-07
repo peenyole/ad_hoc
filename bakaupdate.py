@@ -10,7 +10,10 @@ import os
 normalized_hash = {
   'Jisatsutou':'Suicide Island',
   'T-REX na Kanojo':'T REX Na Kanojo',
-  'Tonari no Kashiwagi-san':'Tonari no Kashiwagi san'
+  'Tonari no Kashiwagi-san':'Tonari no Kashiwagi san',
+  'Demi-chan wa Kataritai':'Demi Chan Wa Kataritai',
+  'Shin Chimoguri Ringo to Kingyobachi Otoko':'Shin Chimoguri Ringo To Kingyobachi Otoko',
+  'Ao no Futsumashi':'Ao no Exorcist'
 }
 
 def login(base_dir):
