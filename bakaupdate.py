@@ -13,7 +13,9 @@ normalized_hash = {
   'Tonari no Kashiwagi-san':'Tonari no Kashiwagi san',
   'Demi-chan wa Kataritai':'Demi Chan Wa Kataritai',
   'Shin Chimoguri Ringo to Kingyobachi Otoko':'Shin Chimoguri Ringo To Kingyobachi Otoko',
-  'Ao no Futsumashi':'Ao no Exorcist'
+  'Ao no Futsumashi':'Ao no Exorcist',
+  'Dragon Ball Chou':'Dragon Ball Super',
+  'Hataraku Maou-sama!':'Demon Lord at Work!'
 }
 
 def login(base_dir):
@@ -114,3 +116,10 @@ def directories(base_dir, series_title, series_path, last_release):
       to_download.append(x)
 
   return to_download
+
+
+
+
+
+
+
